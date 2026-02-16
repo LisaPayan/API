@@ -11,12 +11,16 @@
 <header>
     <div class="menu">
         <div class="menu_lien">
-            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
-            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
-            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+            <h4><a class="a_menu" title="Retour au menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" title="Accès aux pays" href="http://localhost:8080/countries">Pays</a></h4>
+            <h4><a class="a_menu" title="Accès aux favoris" href="http://localhost:8080/favoris">Favoris</a></h4>
         </div>
         <div class="logo">
             <h2>🌍</h2>
+        </div>
+        <div class="menu_lien2">
+            <h4><a class="a_menu" title="Accès aux pays avec pagination" href="http://localhost:8080/countries/pagination">Pagination</a></h4>
+            <h4><a class="a_menu" title="Accès aux flitres" href="http://localhost:8080/filter">Filtrage</a></h4>
         </div>
     </div>
     <div class="trait"></div>
@@ -38,14 +42,18 @@
     <div class="box">
         {{range .}}
         <div class="box_coun">
+
             <div class="box_flag">
-                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}"
-                    title="Drapeau {{.Name.NameOfficiel}}">
+                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}" title="Drapeau {{.Name.NameOfficiel}}">
             </div>
             <div class="box_des">
-            
-                <button type="submit" class="button_fav"><a href="/favoris/add?name={{.Name.NameOfficiel}}">🤍</a></button>
-                
+
+                <form action="/favorites/toggle" method="post" style="display:inline;">
+                    <input type="hidden" name="name" value="{{.Name.NameOfficiel}}">
+                    <button type="submit" class="button_fav" title="Clique ici pour ajouter les favoris">
+                        {{if .IsFavorite}}❤️{{else}}🤍{{end}}
+                    </button>
+                </form>
 
                 <div>
                     <h3>{{.Name.NameOfficiel}}</h3>
@@ -60,6 +68,7 @@
         </div>
         {{end}}
     </div>
+
 </body>
 
 </html>

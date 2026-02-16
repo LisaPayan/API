@@ -1,30 +1,69 @@
 {{define "pagination"}}
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagination</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>Pagination Pays</title>
 </head>
-<body>
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" title="Retour au menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" title="Accès aux pays" href="http://localhost:8080/countries">Pays</a></h4>
+            <h4><a class="a_menu" title="Accès aux favoris" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+        <div class="menu_lien2">
+            <h4><a class="a_menu" title="Accès aux pays avec pagination" href="http://localhost:8080/countries/pagination">Pagination</a></h4>
+            <h4><a class="a_menu" title="Accès aux flitres" href="http://localhost:8080/filter">Filtrage</a></h4>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+<body class="back_g">
+
     <h1>Découvrez tous les pays de notre merveilleux monde !</h1>
     <div class="box">
         {{range .Data}}
         <div class="box_coun">
             <div class="box_flag">
-                <div><img src="{{ .Flag.PngFlag}}" alt="Drapeau {{ .Name.NameOfficiel}}"></div>
+                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}" title="Drapeau {{.Name.NameOfficiel}}">
             </div>
             <div class="box_des">
-                <div><h2>{{ .Name.NameOfficiel}}</h2></div>
-                <div><h4>{{ .Region}}</h4></div>
-                <div><button class="button_cons" type="button">Consulter</button></div>
+
+                <div>
+                    <h3>{{.Name.NameOfficiel}}</h3>
+                </div>
+                <div>
+                    <h5>{{.Region}}</h5>
+                </div>
+                <div><button class="button_cons" type="button" title="Clique ici pour voir plus d'informations sur {{.Name.NameOfficiel}}"><a href="/countries/details?name={{.Name.NameOfficiel}}">Consulter</a></button></div>
             </div>
-            <button><a href="/pokemons/pagination?page={{.Prev}}">Page prev</a></button>
-            <p>{{.Page}}</p>
-            <button><a href="/pokemons/pagination?page={{.Next}}">Page next</a></button>
-            </div>
+        </div>
         {{end}}
     </div>
+    <div class="pagination">
+        {{if gt .Page 0}}
+        <div>
+            <button class="button_search" type="button" title="Clique ici pour voir les pays précédents"><a href="/countries/pagination?page={{.Prev}}">Précédent</a></button>
+        </div>
+        {{end}}
+
+        <div>
+            <p>Page {{.Page}}</p>
+        </div>
+
+        <div>
+            <button class="button_search" type="button" title="Clique ici pour voir les pays suivant"><a href="/countries/pagination?page={{.Next}}">Suivant</a></button>  
+        </div>
+    </div>
+
 </body>
+
 </html>
 {{end}}

@@ -37,11 +37,21 @@ h1 {
     align-items: center; 
     justify-content: space-evenly;
 }
+
+.menu_lien2 {
+    display: flex;
+    box-sizing: content-box;
+    height: 100%;
+    width: 41%;
+    align-items: center; 
+    justify-content: space-evenly;
+}
+
 .logo {
     display: flex;
     box-sizing: content-box;
     height: 100%;
-    width: 51%;
+    width: 10%;
     align-items: center; 
 }
 .trait {
@@ -448,3 +458,34 @@ input[type="checkbox"]:checked {
     outline: none;  
 }
 
+.button_fav:hover {
+    cursor: pointer;
+    color: black;
+    background-color: #F5F2EA;
+}
+
+.box_page_fav_div {
+    height: 22vh;
+    width: 16vw;
+    margin: 3vw;
+    background-color: #F5F2EA;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 3px solid;
+    border-color: #B8BEB5;
+    border-radius: 10px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.bt {
+    margin-bottom: 5vh;
+}

@@ -12,12 +12,16 @@
 <header>
     <div class="menu">
         <div class="menu_lien">
-            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
-            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
-            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+            <h4><a class="a_menu" title="Retour au menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" title="Accès aux pays" href="http://localhost:8080/countries">Pays</a></h4>
+            <h4><a class="a_menu" title="Accès aux favoris" href="http://localhost:8080/favoris">Favoris</a></h4>
         </div>
         <div class="logo">
             <h2>🌍</h2>
+        </div>
+        <div class="menu_lien2">
+            <h4><a class="a_menu" title="Accès aux pays avec pagination" href="http://localhost:8080/countries/pagination">Pagination</a></h4>
+            <h4><a class="a_menu" title="Accès aux flitres" href="http://localhost:8080/filter">Filtrage</a></h4>
         </div>
     </div>
     <div class="trait"></div>
@@ -26,14 +30,14 @@
 <body class="back_g">
     <div class="parent_div_serach">
         <div class="div_search">
-            <button class="button_search" type="button"><a href="http://localhost:8080/countries">Retour</a></button>
+            <button class="button_search" type="button" title="Revenir à la liste des pays"><a href="/countries">Retour</a></button>
         </div>
     </div>
     <h1>Tout savoir sur {{.Name.NameOfficiel}}</h1>
     <div class="box_details">
         <div class="box_details_div">
             <div class="details_flags_div">
-                <img src="{{ .Flag.PngFlag}}" alt="Drapeau {{ .Name.NameOfficiel}}">
+                <img src="{{ .Flag.PngFlag}}" alt="Drapeau {{ .Name.NameOfficiel}}" title="Drapeau {{.Name.NameOfficiel}}">
             </div>
             <div class="details_country_div">
                 <div class="details_sous_div1">
@@ -101,8 +105,7 @@
                         <div>
                             <h3>Maps: </h3>
                         </div>
-                        <div><button class="button_cons"><a href="{{.Maps.GoogleMaps}}"
-                                    target="_blank">Voir</a></button></div>
+                        <div><button class="button_cons" title="Clique ici pour découvrir où se situe {{.Name.NameOfficiel}}"><a href="{{.Maps.GoogleMaps}}" target="_blank" >Voir</a></button></div>
                     </div>
                 </div>
                 <div class="details_sous_div2">
