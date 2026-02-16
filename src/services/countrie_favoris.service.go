@@ -23,11 +23,9 @@ func GetFavoriteNames() []string {
 		return []string{}
 	}
 
-	var data []FavorisData
-	json.Unmarshal(file, &data)
 	var names []string
-	for _, f := range data {
-		names = append(names, f.NameFav.NameOfficiel)
+	if err := json.Unmarshal(file, &names); err != nil {
+		return []string{}
 	}
 	return names
 }
@@ -43,15 +41,15 @@ func IsFavorite(name string) bool {
 }
 
 func ToggleFavoriteName(name string) {
-	names := GetFavoriteNames() // renvoie []string
+	names := GetFavoriteNames()
 	exists := false
 	var newNames []string
 
-	for _, savedName := range names {
-		if savedName == name {
+	for _, n := range names {
+		if n == name {
 			exists = true
 		} else {
-			newNames = append(newNames, savedName)
+			newNames = append(newNames, n)
 		}
 	}
 
@@ -59,33 +57,31 @@ func ToggleFavoriteName(name string) {
 		newNames = append(newNames, name)
 	}
 
-	var data []FavorisData
-	for _, n := range newNames {
-		data = append(data, FavorisData{
-			NameFav: NameFav{
-				NameOfficiel: n,
-				NameUtilisé:  n,
-			},
-		})
-	}
-
-	fileContent, _ := json.MarshalIndent(data, "", "  ")
-	os.WriteFile(favorisFile, fileContent, 0644)
+	fileContent, _ := json.MarshalIndent(newNames, "", "  ")
+	_ = os.WriteFile(favorisFile, fileContent, 0644)
 }
 
 func GetAllFavories() ([]Countrie, error) {
-	names := GetFavoriteNames()
-	var countriesFav []Countrie
+	countries, _, err := GetCountries()
+	if err != nil {
+		return nil, err
+	}
 
-	for _, name := range names {
-		countryFav, err := GetCountryByName(name)
-		if err == nil {
-			temp := countryFav
-			temp.IsFavorite = true
-			countriesFav = append(countriesFav, temp)
+	favNames := GetFavoriteNames()
+	var favorites []Countrie
+
+	for _, country := range *countries {
+		for _, f := range favNames {
+			if country.Name.NameOfficiel == f || country.Name.NameUtilisé == f {
+				temp := country
+				temp.IsFavorite = true
+				favorites = append(favorites, temp)
+				break
+			}
 		}
 	}
-	return countriesFav, nil
+
+	return favorites, nil
 }
 
 func GetCountryByName(name string) (Countrie, error) {

@@ -63,7 +63,9 @@ func DisplaySearch(w http.ResponseWriter, r *http.Request) {
 }
 
 func DisplayFilter(w http.ResponseWriter, r *http.Request) {
+	popNbr, _ := strconv.Atoi(strings.TrimSpace(r.FormValue("pop")))
 
+	r.ParseForm()
 	region := r.Form["region"]
 	language := r.Form["language"]
 
@@ -74,11 +76,7 @@ func DisplayFilter(w http.ResponseWriter, r *http.Request) {
 		language[i] = strings.ToLower(language[i])
 	}
 
-	fmt.Println(region)
-	fmt.Println(language)
-	fmt.Println(r.Form.Get("region"))
-
-	data, dataStatusCode, dataError := services.GetCountries()
+	data, dataStatusCode, dataError := services.GetCountriesFilter()
 	if dataStatusCode != http.StatusOK || dataError != nil {
 		log.Printf("Erreur DisplayFilter - %s", dataError.Error())
 		http.Error(w, fmt.Sprintf("Erreur service - code : %d \n message: %v", dataStatusCode, dataError.Error()), dataStatusCode)
@@ -88,6 +86,7 @@ func DisplayFilter(w http.ResponseWriter, r *http.Request) {
 	valideCountry := []services.Countrie{}
 
 	for _, country := range *data {
+
 		checkRegion := false
 		for _, r := range region {
 			if strings.EqualFold(strings.TrimSpace(country.Region), strings.TrimSpace(r)) {
@@ -106,8 +105,11 @@ func DisplayFilter(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
+		checkPop := country.Pop >= popNbr
+
 		if (checkRegion || len(region) == 0) &&
-			(checkLanguage || len(language) == 0) {
+			(checkLanguage || len(language) == 0) &&
+			(checkPop || popNbr == 0) {
 			valideCountry = append(valideCountry, country)
 		}
 	}
@@ -130,8 +132,8 @@ func DisplayPagination(w http.ResponseWriter, r *http.Request) {
 		pageInt = 0
 	}
 
-	startIndex := pageInt * 10
-	endIndex := (pageInt * 10) + 10
+	startIndex := pageInt * 15
+	endIndex := (pageInt * 15) + 15
 
 	data, statusCode, err := services.GetCountries()
 	if err != nil {
@@ -151,7 +153,7 @@ func DisplayPagination(w http.ResponseWriter, r *http.Request) {
 	if startIndex > len((*data)) {
 		pageInt = 0
 		startIndex = 0
-		endIndex = 10
+		endIndex = 15
 	}
 
 	SelectCountries := (*data)[startIndex:endIndex]

@@ -40,7 +40,39 @@ func GetCountries() (*[]Countrie, int, error) {
 		Timeout: time.Second * 10,
 	}
 
-	request, requestErr := http.NewRequest(http.MethodGet, "https://restcountries.com/v3.1/all?fields=name,flags,region,language", nil)
+	request, requestErr := http.NewRequest(http.MethodGet, "https://restcountries.com/v3.1/all?fields=name,flags,region", nil)
+	if requestErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("Erreur préparation requête - %s", requestErr.Error())
+	}
+
+	response, responseErr := _client.Do(request)
+
+	if responseErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("Erreur envoi de la requête - %s", responseErr.Error())
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		return nil, response.StatusCode, fmt.Errorf("Erreur réponse - %s", response.Status)
+	}
+
+	var countries []Countrie
+
+	decodeErr := json.NewDecoder(response.Body).Decode(&countries)
+	if decodeErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("Erreur décode de données - %s", decodeErr.Error())
+	}
+
+	return &countries, response.StatusCode, nil
+}
+
+func GetCountriesFilter() (*[]Countrie, int, error) {
+	_client := http.Client{
+		Timeout: time.Second * 10,
+	}
+
+	request, requestErr := http.NewRequest(http.MethodGet, "https://restcountries.com/v3.1/all?fields=name,flags,region,languages,population", nil)
 	if requestErr != nil {
 		return nil, http.StatusInternalServerError, fmt.Errorf("Erreur préparation requête - %s", requestErr.Error())
 	}

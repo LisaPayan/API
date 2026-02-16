@@ -8,9 +8,7 @@ import (
 
 func DisplayFavorites(w http.ResponseWriter, r *http.Request) {
 	names, _ := services.GetAllFavories()
-
 	helper.RenderTemplate(w, r, "favoris", names)
-
 }
 
 func ToggleFavorite(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +16,5 @@ func ToggleFavorite(w http.ResponseWriter, r *http.Request) {
 		name := r.FormValue("name")
 		services.ToggleFavoriteName(name)
 	}
-
-	http.Redirect(w, r, r.Header.Get(" "), http.StatusSeeOther)
+	http.Redirect(w, r, "/favoris", http.StatusSeeOther)
 }

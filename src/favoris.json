@@ -1,42 +1,6 @@
 [
-  {
-    "name": {
-      "official": "Vatican City State",
-      "common": ""
-    },
-    "languages": null,
-    "capital": null,
-    "region": "",
-    "subregion": "",
-    "borders": null,
-    "maps": {
-      "googleMaps": ""
-    },
-    "population": 0,
-    "area": 0,
-    "flags": {
-      "png": "",
-      "alt": ""
-    }
-  },
-  {
-    "name": {
-      "official": "United States Minor Outlying Islands",
-      "common": ""
-    },
-    "languages": null,
-    "capital": null,
-    "region": "",
-    "subregion": "",
-    "borders": null,
-    "maps": {
-      "googleMaps": ""
-    },
-    "population": 0,
-    "area": 0,
-    "flags": {
-      "png": "",
-      "alt": ""
-    }
-  }
+  "Bouvet Island",
+  "Kingdom of Saudi Arabia",
+  "Democratic People's Republic of Korea",
+  "Vatican City State"
 ]

@@ -19,7 +19,4 @@ func countriesRoutes(router *http.ServeMux) {
 	router.HandleFunc("/favoris", controllers.DisplayFavorites)
 
 	router.HandleFunc("/favorites/toggle", controllers.ToggleFavorite)
-
-	router.HandleFunc("/favoris/add", controllers.DisplayFavorites)
-
 }
