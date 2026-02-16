@@ -1,0 +1,44 @@
+{{define "favoris"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>Vos favoris</title>
+</head>
+
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <h1>Mes favoris</h1>
+    <div>
+        {{range .}}
+            <div>
+                <div></div>
+                <div>{{.Name.NameOfficiel}}</div>
+                <div>
+                    <button class="button_cons" type="button" title="Clique ici pour voir plus d'informations sur {{.Name.NameOfficiel}}"><a href="/countries/details?name={{.Name.NameOfficiel}}">Consulter</a></button>
+                </div>
+            </div>
+        {{end}}
+    </div>
+    <div><button class="button_cons" type="button" title="Clique ici pour retourner à la liste des pays"><a href="/countries">Retour aux pays</a></button></div>
+
+</body>
+
+</html>
+{{end}}

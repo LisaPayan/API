@@ -1,0 +1,30 @@
+{{define "pagination"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+</head>
+<body>
+    <h1>Découvrez tous les pays de notre merveilleux monde !</h1>
+    <div class="box">
+        {{range .Data}}
+        <div class="box_coun">
+            <div class="box_flag">
+                <div><img src="{{ .Flag.PngFlag}}" alt="Drapeau {{ .Name.NameOfficiel}}"></div>
+            </div>
+            <div class="box_des">
+                <div><h2>{{ .Name.NameOfficiel}}</h2></div>
+                <div><h4>{{ .Region}}</h4></div>
+                <div><button class="button_cons" type="button">Consulter</button></div>
+            </div>
+            <button><a href="/pokemons/pagination?page={{.Prev}}">Page prev</a></button>
+            <p>{{.Page}}</p>
+            <button><a href="/pokemons/pagination?page={{.Next}}">Page next</a></button>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>
+{{end}}

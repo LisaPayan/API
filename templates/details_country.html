@@ -1,0 +1,130 @@
+{{define "details-country"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails</title>
+</head>
+
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <div class="parent_div_serach">
+        <div class="div_search">
+            <button class="button_search" type="button"><a href="http://localhost:8080/countries">Retour</a></button>
+        </div>
+    </div>
+    <h1>Tout savoir sur {{.Name.NameOfficiel}}</h1>
+    <div class="box_details">
+        <div class="box_details_div">
+            <div class="details_flags_div">
+                <img src="{{ .Flag.PngFlag}}" alt="Drapeau {{ .Name.NameOfficiel}}">
+            </div>
+            <div class="details_country_div">
+                <div class="details_sous_div1">
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Nom officiel: </h3>
+                        </div>
+                        <div>{{.Name.NameOfficiel}}</div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Nom utilisé: </h3>
+                        </div>
+                        <div>{{.Name.NameUtilisé}}</div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Capitale:</h3>
+                        </div>
+                        <div>
+                            {{index .Capitale 0}}
+                        </div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Population: </h3>
+                        </div>
+                        <div>{{.Pop}} habs</div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Monnaie: </h3>
+                        </div>
+                        <div>
+                            {{if .Currencies}}
+                                {{range .Currencies}}
+                                    <span class="currency">{{.Name}} ({{.Symbol}})</span>
+                                {{end}}
+                            {{else}}
+                                <span>Aucune.</span>
+                            {{end}}
+                        </div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Langue(s): </h3>
+                        </div>
+                        <div>
+                            {{if .Languages}}
+                            {{range .Languages}}
+                            <span class="border">{{.}}</span>
+                            {{end}}
+                            {{else}}
+                            <span>Aucune.</span>
+                            {{end}}
+                        </div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Continent: </h3>
+                        </div>
+                        <div>{{.Region}} ({{.SousRegion}})</div>
+                    </div>
+                    <div class="details_country_div_ele">
+                        <div>
+                            <h3>Maps: </h3>
+                        </div>
+                        <div><button class="button_cons"><a href="{{.Maps.GoogleMaps}}"
+                                    target="_blank">Voir</a></button></div>
+                    </div>
+                </div>
+                <div class="details_sous_div2">
+                    <div>
+                        <h3>Pays qui le bordent:</h3>
+                    </div>
+                    <div>
+                        {{if .BordPays}}
+                        {{range .BordPays}}
+                        <span class="border">{{.}}</span>
+                        {{end}}
+                        {{else}}
+                        Aucun.
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}

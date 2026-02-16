@@ -1,0 +1,66 @@
+{{define "descript-countries"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/index.css">
+    <title>Pays du monde entier</title>
+</head>
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <div class="parent_div_serach">
+        <div class="div_search">
+            <form action="countries/search" method="get">
+                <input class="search_barre" type="text" name="query" placeholder="nom officel, nom, continent">
+                <button class="button_search" type="submit"
+                    title="Clique ici pour avoir les résultats de votre recherche">Recherche</button>
+            </form>
+            <p class="info">🛈 Mettre les continents en anglais</p>
+        </div>
+    </div>
+
+    <h1>Découvrez tous les pays de notre merveilleux monde !</h1>
+    <div class="box">
+        {{range .}}
+        <div class="box_coun">
+            <div class="box_flag">
+                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}"
+                    title="Drapeau {{.Name.NameOfficiel}}">
+            </div>
+            <div class="box_des">
+            
+                <button type="submit" class="button_fav"><a href="/favoris/add?name={{.Name.NameOfficiel}}">🤍</a></button>
+                
+
+                <div>
+                    <h3>{{.Name.NameOfficiel}}</h3>
+                </div>
+                <div>
+                    <h5>{{.Region}}</h5>
+                </div>
+                <div><button class="button_cons" type="button"
+                        title="Clique ici pour voir plus d'informations sur {{.Name.NameOfficiel}}"><a
+                            href="/countries/details?name={{.Name.NameOfficiel}}">Consulter</a></button></div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+
+</html>
+{{end}}

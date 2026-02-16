@@ -1,0 +1,174 @@
+{{define "filter_countries"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/index.css">
+    <title>Filtre</title>
+</head>
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <h1>OPTION DE FILTRAGE</h1>
+    <div class="box_filter">
+        <form action="" method="get">
+            <div class="div_filter">
+
+                <div class="div_titre">
+                    <div>
+                        <h2>Selectionnez vos options de filtrage</h2>
+                    </div>
+                </div>
+                <div class="div_cat">
+                    <div class="div_options">
+                        <div class="div_options_titre">
+                            <div>
+                                <h3>Continent(s):</h3>
+                            </div>
+                        </div>
+                        <div class="div_options_ele">
+                            <div class="div_options_ele_taille">
+                                <div>
+                                    <input type="checkbox" name="region" id="africa" value="africa">
+                                    <label for="africa">Afrique</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="region" id="americas" value="americas">
+                                    <label for="americas">Amériques</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="region" id="antarctic" value="antarctic">
+                                    <label for="antarctic">Antarctique</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="region" id="asia" value="asia">
+                                    <label for="asia">Asie</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="region" id="europe" value="europe">
+                                    <label for="europe">Europe</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="region" id="oceania" value="oceania">
+                                    <label for="oceania">Océanie</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="div_options">
+                        <div class="div_options_titre">
+                            <div>
+                                <h3>Langue(s) :</h3>
+                            </div>
+                        </div>
+                        <div class="div_options_ele">
+                            <div class="div_options_ele_taille">
+                                <div>
+                                    <input type="checkbox" name="language" id="english" value="english">
+                                    <label for="english">Anglais</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="spanish" value="spanish">
+                                    <label for="spanish">Espagnol</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="portuguese" value="portuguese">
+                                    <label for="">Portugais</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="russian" value="russian">
+                                    <label for="russian">Russe</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="japanese" value=""japanese>
+                                    <label for="japanese">Japonais</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="german" value="german">
+                                    <label for="german">Allemand</label>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" name="language" id="arabic" value="arabic">
+                                    <label for="arabic">Arabe</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="language" id="french" value="french">
+                                    <label for="french">Français</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="div_options">
+                        <div class="div_options_titre">
+                            <div>
+                                <h3>Population :</h3>
+                            </div>
+                        </div>
+                        <div class="div_options_ele">
+                            <div class="div_options_ele_taille">
+                                <div>
+                                    <label for="pop">Nombre d'habitants minimum: </label>
+                                    <input class="pop_barre" type="number" name="pop" placeholder="Ex: 1000000">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div_retour">
+                    <div>
+                        <button class="button_cons" type="submit" title="Clique ici pour envoyer les options de filtrage">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="box">
+        {{range .}}
+        <div class="box_coun">
+            <div class="box_flag">
+                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}"
+                    title="Drapeau {{.Name.NameOfficiel}}">
+            </div>
+            <div class="box_des">
+                <div>
+                    <h3>{{.Name.NameOfficiel}}</h3>
+                </div>
+                <div>
+                    <h5>{{.Region}}</h5>
+                </div>
+                <div><button class="button_cons" type="button"
+                        title="Clique ici pour voir plus d'informations sur {{.Name.NameOfficiel}}"><a
+                            href="/countries/details?name={{.Name.NameOfficiel}}">Consulter</a></button></div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+
+</html>
+{{end}}

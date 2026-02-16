@@ -1,0 +1,54 @@
+{{define "search_countries"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>Votre recherche</title>
+</head>
+
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <div class="parent_div_serach">
+        <div class="div_search">
+            <button class="button_search" type="button" title="Clique ici pour revenir à tous les pays"><a href="http://localhost:8080/countries">Retour</a></button>
+        </div>
+    </div>
+    <h1>Voici les résultats de votre recherche.</h1>
+    <div class="box">
+        {{range .}}
+        <div class="box_coun">
+            <div class="box_flag">
+                <img src="{{.Flag.PngFlag}}" alt="Drapeau {{.Name.NameOfficiel}}" title="Drapeau {{.Name.NameOfficiel}}">
+            </div>
+            <div class="box_des">
+                <div>
+                    <h3>{{.Name.NameOfficiel}}</h3>
+                </div>
+                <div>
+                    <h5>{{.Region}}</h5>
+                </div>
+                <div><button class="button_cons" type="button" title="Clique ici pour voir plus d'informations sur {{.Name.NameOfficiel}}"><a href="/countries/details?name={{.Name.NameOfficiel}}">Consulter</a></button></div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+
+</html>
+{{end}}

@@ -1,0 +1,45 @@
+{{define "menu"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/index.css">
+    <title>Menu</title>
+</head>
+
+<header>
+    <div class="menu">
+        <div class="menu_lien">
+            <h4><a class="a_menu" href="http://localhost:8080/">Menu</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/filter">Filtre</a></h4>
+            <h4><a class="a_menu" href="http://localhost:8080/favoris">Favoris</a></h4>
+        </div>
+        <div class="logo">
+            <h2>🌍</h2>
+        </div>
+    </div>
+    <div class="trait"></div>
+</header>
+
+<body class="back_g">
+    <h1>TOUT SAVOIR SUR LE MONDE !</h1>
+    <div class="box_pres">
+        <div class="pres">
+            <div class="pres_1">
+                <div>Tu veux découvrir et apprendre une multitude d'informations sur tous les pays du monde ? </div>
+                <div>Bonne nouvelle, tu es au bon endroit ! </div>  
+                <div>Je te laisse parcourir notre interface et partir à la découverte du monde grâce à nos fonctionnalités. </div>  
+                <div>Et surtout, n'oublie pas de t'amuser ! </div>
+            </div>
+            <div class="pres_2">
+                <p>Afin de commencer ton voyage clique sur le bouton ci dessous ↓</p>
+                <button class="button_cons" type="button" title="Clique ici pour découvrir tous les pays"><a href="http://localhost:8080/countries">A l'aventure</a></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}
